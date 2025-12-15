@@ -9,11 +9,12 @@
   },
   "keywords": [],
   "author": "",
-  "type":"module",
+  "type": "module",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "chatify": "file:..",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
