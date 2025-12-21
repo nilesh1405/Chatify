@@ -4,15 +4,15 @@ import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
 import { MessageCircleIcon, MailIcon, LoaderIcon, LockIcon } from "lucide-react";
 import { Link } from "react-router";
 
-
 function LoginPage() {
-  const [formData, setFormData] = useState({email:'', password:''});
-  const {login, isLoggingIn} = useAuthStore();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const { login, isLoggingIn } = useAuthStore();
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     login(formData);
-  }
+  };
+
   return (
     <div className="w-full flex items-center justify-center p-4 bg-slate-900">
       <div className="relative w-full max-w-6xl md:h-[800px] h-[650px]">
@@ -105,5 +105,4 @@ function LoginPage() {
     </div>
   );
 }
-
-export default LoginPage
+export default LoginPage;

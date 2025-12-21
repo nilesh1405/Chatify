@@ -1,7 +1,7 @@
 import cloudinary from "../lib/cloudinary.js";
 import Message from "../models/Message.js";
 import User from "../models/User.js";
-
+import { getReceiverSocketId, io } from "../lib/socket.js";
 
 
 export const getAllContacts = async (req, res) => {
@@ -51,8 +51,8 @@ export const getMessagesByUserId = async (req, res) => {
 
         const messages = await Message.find({
             $or:[
-                {senderId:myId,reciverId:userToChatId},
-                {senderId:userToChatId,reciverId:myId}
+                {senderId:myId,receiverId:userToChatId},
+                {senderId:userToChatId,receiverId:myId}
             ]
         });
 
@@ -83,6 +83,10 @@ export const sendMessage = async (req, res) => {
         });
 
         await newMessage.save();
+        const reciverSocketId = getReceiverSocketId(receiverId);
+        if(reciverSocketId){
+            io.to(reciverSocketId).emit("newMessage", newMessage);
+        }
         res.status(201).json(newMessage);
     }catch(error){
         console.log("Error in sendMessage controller:",error);
